@@ -16,8 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetweatherforecast.navigation.WeatherNavigation
 import com.example.jetweatherforecast.ui.theme.JetWeatherForecastTheme
 import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
 
-@EntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
