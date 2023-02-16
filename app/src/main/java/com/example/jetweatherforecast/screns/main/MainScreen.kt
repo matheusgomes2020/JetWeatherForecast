@@ -30,6 +30,7 @@ import com.example.jetweatherforecast.R
 import com.example.jetweatherforecast.data.DataOrException
 import com.example.jetweatherforecast.model.Weather
 import com.example.jetweatherforecast.model.WeatherItem
+import com.example.jetweatherforecast.navigation.WeatherScreens
 import com.example.jetweatherforecast.screns.main.MainViewModel
 import com.example.jetweatherforecast.utils.formatDate
 import com.example.jetweatherforecast.utils.formatDateTime
@@ -64,13 +65,16 @@ fun MainScreen(navController: NavController,
 @Composable
 fun MainScaffold( weather: Weather, navController: NavController ) {
 
-
-
     Scaffold(topBar = {
 
 
         WeatherAppBar(title = weather.city.name + " ,${ weather.city.country }",
             navController = navController,
+            onAddActionClicked = {
+
+                                 navController.navigate(WeatherScreens.SearchScrren.name )
+
+            } ,
                     elevation = 5.dp ){
 
             Log.d( "TAGRR", "MainScaffold: Button Clicked" )
