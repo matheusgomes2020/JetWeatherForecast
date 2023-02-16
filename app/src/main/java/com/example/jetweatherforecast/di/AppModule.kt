@@ -1,7 +1,6 @@
 package com.example.jetweatherforecast.di
 
 import com.example.jetweatherforecast.network.WeatherApi
-import com.example.jetweatherforecast.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
