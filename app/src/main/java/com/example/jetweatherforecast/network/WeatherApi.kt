@@ -1,6 +1,9 @@
 package com.example.jetweatherforecast.network
 
+import androidx.compose.ui.unit.Constraints
 import com.example.jetweatherforecast.model.Weather
+import com.example.jetweatherforecast.model.WeatherObject
+import com.example.jetweatherforecast.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Singleton
