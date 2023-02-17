@@ -39,14 +39,17 @@ import com.example.jetweatherforecast.widgets.*
 
 @Composable
 fun MainScreen(navController: NavController,
-               mainViewModel: MainViewModel = hiltViewModel()) {
+               mainViewModel: MainViewModel = hiltViewModel(),
+                city: String? ) {
+
+    Log.d("TAG", "MainScreen: $city")
 
 
 
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException( loading = true ) ) {
 
-        value = mainViewModel.getWeatherData( city = "Campinas" )
+        value = mainViewModel.getWeatherData( city = city.toString() )
 
     }.value
 
@@ -63,30 +66,26 @@ fun MainScreen(navController: NavController,
 }
 
 @Composable
-fun MainScaffold( weather: Weather, navController: NavController ) {
+fun MainScaffold(
+    weather: Weather, navController: NavController
+) {
 
     Scaffold(topBar = {
-
-
-        WeatherAppBar(title = weather.city.name + " ,${ weather.city.country }",
+        WeatherAppBar(title = weather.city.name + " ,${weather.city.country}",
             navController = navController,
             onAddActionClicked = {
+                navController.navigate(WeatherScreens.SearchScrren.name)
 
-                                 navController.navigate(WeatherScreens.SearchScrren.name )
 
-            } ,
-                    elevation = 5.dp ){
-
-            Log.d( "TAGRR", "MainScaffold: Button Clicked" )
-
+            },
+            elevation = 5.dp){
+            Log.d("TAG", "MainScaffold: Button Clicked")
         }
 
     }) {
-
-        MainContent( data = weather )
+        MainContent(data = weather)
 
     }
-
 }
 
 @Composable

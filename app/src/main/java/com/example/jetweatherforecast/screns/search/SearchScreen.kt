@@ -2,6 +2,7 @@
 
 package com.example.jetweatherforecast.screns.search
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,30 +27,35 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jetweatherforecast.navigation.WeatherScreens
 import com.example.jetweatherforecast.widgets.WeatherAppBar
+import kotlin.math.log
 
+@ExperimentalComposeUiApi
 @Composable
-fun SearchScreen( navController: NavController ) {
-
+fun SearchScreen(navController: NavController) {
     Scaffold(topBar = {
-
         WeatherAppBar(
             title = "Search",
             navController = navController,
-                      icon = Icons.Default.ArrowBack,
-                      isMainScreen = false,
-                      ){
+            icon = Icons.Default.ArrowBack,
+            isMainScreen = false,
+        ){
             navController.popBackStack()
         }
-
-    } ) {
-
+    }) {
         Surface() {
-
             Column(verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                SearchBar(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)){ mCity ->
+                    navController.navigate(WeatherScreens.MainScrren.name + "/$mCity")
 
-                Text(text = "Search...")
+                }
+
+
 
             }
 
@@ -59,35 +65,30 @@ fun SearchScreen( navController: NavController ) {
 
 }
 
+@ExperimentalComposeUiApi
 @Composable
 fun SearchBar(
-    onSearch: ( String ) -> Unit = {} ) {
-
-    val searchQueryState = rememberSaveable {
-
-        mutableStateOf( "" )
-
-    }
-
+    modifier: Modifier = Modifier,
+    onSearch: (String) -> Unit = {}) {
+    val searchQueryState = rememberSaveable { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
+    val valid = remember(searchQueryState.value){
+        searchQueryState.value.trim().isNotEmpty()
+    }
 
-    val valid = remember( searchQueryState.value ) {
-
-        searchQueryState.value.trim().isNotBlank()
+    Column {
+        CommonTextField(
+            valueState = searchQueryState,
+            placeholder = "Seattle",
+            onAction = KeyboardActions {
+                if (!valid) return@KeyboardActions
+                onSearch(searchQueryState.value.trim())
+                searchQueryState.value = ""
+                keyboardController?.hide()
+            })
 
     }
 
-        Column() {
-            
-            CommonTextField(
-                valueState = searchQueryState,
-                placeholder  = "Campinas",
-                onAction = KeyboardActions { 
-                    
-                }
-            )
-        
-    }
 }
 
 @Composable
