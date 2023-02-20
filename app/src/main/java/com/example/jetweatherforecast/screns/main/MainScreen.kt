@@ -67,7 +67,8 @@ fun MainScreen(navController: NavController,
 
 @Composable
 fun MainScaffold(
-    weather: Weather, navController: NavController
+    weather: Weather,
+    navController: NavController
 ) {
 
     Scaffold(topBar = {
