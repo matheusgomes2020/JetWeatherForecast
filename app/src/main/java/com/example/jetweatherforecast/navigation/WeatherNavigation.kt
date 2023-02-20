@@ -10,21 +10,24 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.jetweatherforecast.screns.MainScreen
 import com.example.jetweatherforecast.screns.WeatherSplashscreen
+import com.example.jetweatherforecast.screns.about.AboutScreen
+import com.example.jetweatherforecast.screns.favorites.FavoritesScreen
 import com.example.jetweatherforecast.screns.main.MainViewModel
 import com.example.jetweatherforecast.screns.search.SearchScreen
+import com.example.jetweatherforecast.screns.settings.SettingsScreen
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun WeatherNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController,
-        startDestination = WeatherScreens.SplashScrren.name ) {
-        composable(WeatherScreens.SplashScrren.name){
+        startDestination = WeatherScreens.SplashScreen.name ) {
+        composable(WeatherScreens.SplashScreen.name){
             WeatherSplashscreen(navController = navController)
         }
 
         //www.google.com/cityname="seattle"
-        val route = WeatherScreens.MainScrren.name
+        val route = WeatherScreens.MainScreen.name
         composable("$route/{city}",
             arguments = listOf(
                 navArgument(name = "city"){
@@ -39,7 +42,7 @@ fun WeatherNavigation() {
 
 
         }
-        /*
+
 
         composable(WeatherScreens.SearchScreen.name){
             SearchScreen(navController = navController)
@@ -56,7 +59,6 @@ fun WeatherNavigation() {
             FavoritesScreen(navController = navController)
         }
 
-         */
 
     }
 }

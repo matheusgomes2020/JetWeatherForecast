@@ -1,7 +1,6 @@
 package com.example.jetweatherforecast.screns
 
 import android.view.animation.OvershootInterpolator
-import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -22,8 +21,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.jetweatherforecast.R
@@ -54,7 +51,7 @@ fun WeatherSplashscreen( navController: NavController ) {
                             }) )
 
         delay( 2000L )
-        navController.navigate( WeatherScreens.MainScrren.name + "/$defaultCity" )
+        navController.navigate( WeatherScreens.MainScreen.name + "/$defaultCity" )
 
     } )
 

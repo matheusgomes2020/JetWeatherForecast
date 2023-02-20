@@ -2,7 +2,6 @@
 
 package com.example.jetweatherforecast.screns.search
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.jetweatherforecast.navigation.WeatherScreens
 import com.example.jetweatherforecast.widgets.WeatherAppBar
-import kotlin.math.log
 
 @ExperimentalComposeUiApi
 @Composable
@@ -51,7 +49,7 @@ fun SearchScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)){ mCity ->
-                    navController.navigate(WeatherScreens.MainScrren.name + "/$mCity")
+                    navController.navigate(WeatherScreens.MainScreen.name + "/$mCity")
 
                 }
 

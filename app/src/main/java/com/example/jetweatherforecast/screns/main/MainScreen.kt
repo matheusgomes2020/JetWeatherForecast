@@ -1,39 +1,28 @@
 package com.example.jetweatherforecast.screns
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
-import com.example.jetweatherforecast.R
 import com.example.jetweatherforecast.data.DataOrException
 import com.example.jetweatherforecast.model.Weather
 import com.example.jetweatherforecast.model.WeatherItem
 import com.example.jetweatherforecast.navigation.WeatherScreens
 import com.example.jetweatherforecast.screns.main.MainViewModel
 import com.example.jetweatherforecast.utils.formatDate
-import com.example.jetweatherforecast.utils.formatDateTime
 import com.example.jetweatherforecast.utils.formatDecimals
 import com.example.jetweatherforecast.widgets.*
 
@@ -75,7 +64,7 @@ fun MainScaffold(
         WeatherAppBar(title = weather.city.name + " ,${weather.city.country}",
             navController = navController,
             onAddActionClicked = {
-                navController.navigate(WeatherScreens.SearchScrren.name)
+                navController.navigate(WeatherScreens.SearchScreen.name)
 
 
             },

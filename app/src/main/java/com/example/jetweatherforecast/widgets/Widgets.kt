@@ -147,7 +147,7 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
             Icon(painter = painterResource(id = R.drawable.wind),
                 contentDescription = "wind icon",
                 modifier = Modifier.size( 20.dp ))
-            Text(text = "${ weather.humidity } mph", style = MaterialTheme.typography.caption)
+            Text(text = "${ weather.speed } mph", style = MaterialTheme.typography.caption)
 
         }
 

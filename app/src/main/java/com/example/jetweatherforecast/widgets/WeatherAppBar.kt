@@ -13,11 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.jetweatherforecast.navigation.WeatherScreens
 
 
 @Composable
@@ -66,7 +66,20 @@ fun ShowSettingsDropdownMenu(showDialog:
                     Text( text = text,
                     modifier = Modifier.clickable {
 
-                    }, fontWeight = FontWeight.W300 )
+                                                  navController.navigate(
+
+                                                      when( text ) {
+
+                                                          "About" -> WeatherScreens.AboutScreen.name
+                                                          "Favorites" -> WeatherScreens.FavoriteScreen.name
+                                                          else -> WeatherScreens.SettingsScreen.name
+
+                                                      }
+
+                                                  )
+
+                    }, fontWeight = FontWeight.W300
+                    )
 
                 }
 
