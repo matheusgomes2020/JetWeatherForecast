@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
@@ -16,8 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.jetweatherforecast.model.Favorite
 import com.example.jetweatherforecast.navigation.WeatherScreens
+import com.example.jetweatherforecast.screns.favorites.FavoriteViewModel
 
 
 @Composable
@@ -98,6 +102,7 @@ fun WeatherAppBar(
     isMainScreen: Boolean = true,
     elevation: Dp = 0.dp,
     navController: NavController,
+    favoriteViewModel: FavoriteViewModel = hiltViewModel(),
     onAddActionClicked: () -> Unit = {},
     onButtonClicked: () -> Unit = {} ) {
 
@@ -155,6 +160,24 @@ fun WeatherAppBar(
                              })
 
                          }
+
+            if ( isMainScreen ) {
+
+                Icon(imageVector = Icons.Default.Favorite,
+                    contentDescription = "Favorite icon",
+                    modifier = Modifier.scale( 0.9f )
+                        .clickable {
+                                   val dataList = title.split( "," )
+                                   favoriteViewModel
+                                       .insertFavorite( Favorite(
+                                           city = dataList[ 0 ], // city name
+                                           country = dataList[ 1 ] // country
+                                                                   ) )
+
+                        },
+                tint = Color.Red.copy( alpha = 0.6f ))
+
+            }
 
         },
         backgroundColor = Color.Transparent,
