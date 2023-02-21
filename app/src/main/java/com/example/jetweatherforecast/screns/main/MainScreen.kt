@@ -1,5 +1,6 @@
 package com.example.jetweatherforecast.screns
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -54,6 +55,7 @@ fun MainScreen(navController: NavController,
     
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScaffold(
     weather: Weather,
@@ -69,7 +71,7 @@ fun MainScaffold(
 
             },
             elevation = 5.dp){
-            Log.d("TAG", "MainScaffold: Button Clicked")
+            //Log.d("TAG", "MainScaffold: Button Clicked")
         }
 
     }) {
