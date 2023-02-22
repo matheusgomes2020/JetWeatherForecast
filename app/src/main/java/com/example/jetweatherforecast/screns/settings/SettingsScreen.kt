@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.jetweatherforecast.model.Unit
 import com.example.jetweatherforecast.widgets.WeatherAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -65,8 +66,11 @@ fun SettingsScreen( navController: NavController,
 
                         unitTogleState = !it
 
-                        if ( unitTogleState ) { choiceState = "Imperial (F)" }
-                        else { choiceState = "Metric (C)" }
+                        choiceState = if ( unitTogleState ) {
+                            "Imperial (F)"
+                        } else {
+                            "Metric (C)"
+                        }
 
                     }, modifier = Modifier
                         .fillMaxWidth(0.5f)
@@ -80,7 +84,8 @@ fun SettingsScreen( navController: NavController,
 
                 Button(onClick = {
 
-
+                                 settingsViewModel.deleteAllUnits()
+                    settingsViewModel.insertUnit( Unit( unit = choiceState ) )
 
                                  },
                     modifier = Modifier
