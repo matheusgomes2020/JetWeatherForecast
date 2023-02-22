@@ -51,10 +51,12 @@ fun SettingsScreen( navController: NavController,
             title = "Settings",
             icon = Icons.Default.ArrowBack,
             isMainScreen = false,
-            navController = navController )
+            navController = navController ) {
 
+            navController.popBackStack()
+
+        }
     } ) {
-
         Surface(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()) {
