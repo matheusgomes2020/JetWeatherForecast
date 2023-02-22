@@ -34,9 +34,14 @@ fun SettingsScreen( navController: NavController,
 
     val measurementUnits = listOf( "Imperial (F)", "Metric (C)" )
 
+    val choiceFromBd = settingsViewModel.unitList.collectAsState().value
+
+    val defaultChoice = if ( choiceFromBd.isNullOrEmpty() ) measurementUnits[ 0 ]
+    else choiceFromBd[ 0 ].unit
+
     var choiceState by remember {
 
-        mutableStateOf( "" )
+        mutableStateOf( defaultChoice )
 
     }
 
