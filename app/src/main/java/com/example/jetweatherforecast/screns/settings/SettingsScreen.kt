@@ -1,12 +1,23 @@
 package com.example.jetweatherforecast.screns.settings
 
+import android.annotation.SuppressLint
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen( navController: NavController) {
+fun SettingsScreen( navController: NavController,
+                    settingsViewModel: SettingsViewModel = hiltViewModel() ) {
 
-    Text(text = "Settings...")
+    Scaffold( topBar = {
+
+
+
+    } ) {
+
+    }
 
 }

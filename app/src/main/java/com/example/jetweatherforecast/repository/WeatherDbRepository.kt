@@ -4,6 +4,7 @@ import com.example.jetweatherforecast.data.WeatherDao
 import com.example.jetweatherforecast.model.Favorite
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import com.example.jetweatherforecast.model.Unit
 
 class WeatherDbRepository @Inject constructor( private val weatherDao: WeatherDao) {
 
@@ -18,5 +19,17 @@ class WeatherDbRepository @Inject constructor( private val weatherDao: WeatherDa
     suspend fun deleteFavorite(favorite: Favorite) = weatherDao.deleteFavorite( favorite )
 
     suspend fun getFavById( city: String ) = weatherDao.getFavById( city )
+
+
+
+    fun getunits(): Flow<List<Unit>> = weatherDao.getUnits()
+
+    suspend fun insertUnit( unit: Unit ) = weatherDao.insertUnit( unit )
+
+    suspend fun updateUnit( unit: Unit ) = weatherDao.updateUnit( unit )
+
+    suspend fun deleteAllUnits() = weatherDao.deleteAllUnits()
+
+    suspend fun deleteUnit( unit: Unit ) = weatherDao.deleteUnit( unit )
 
 }
