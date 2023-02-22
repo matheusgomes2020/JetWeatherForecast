@@ -1,5 +1,7 @@
 package com.example.jetweatherforecast.widgets
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -55,18 +58,18 @@ fun ShowSettingsDropdownMenu(showDialog:
                     expanded = false
                     showDialog.value = false
                 }) {
-                    
+
                     Icon(imageVector = when( text ) {
-                                                    
+
                         "About" -> Icons.Default.Info
                         "Favorites" -> Icons.Default.FavoriteBorder
-                        else -> Icons.Default.Settings 
-                        
+                        else -> Icons.Default.Settings
+
                         } ,
                         contentDescription = null,
                         tint = Color.LightGray
                         )
-                    
+
                     Text( text = text,
                     modifier = Modifier.clickable {
 
@@ -111,6 +114,14 @@ fun WeatherAppBar(
         mutableStateOf( false )
 
     }
+
+    val showIt = remember {
+
+        mutableStateOf( false )
+
+    }
+
+    val context = LocalContext.current
 
     if ( showDialog.value ) {
         ShowSettingsDropdownMenu( showDialog = showDialog, navController = navController  )
@@ -161,26 +172,64 @@ fun WeatherAppBar(
 
                          }
 
+
+
             if ( isMainScreen ) {
 
-                Icon(imageVector = Icons.Default.Favorite,
-                    contentDescription = "Favorite icon",
-                    modifier = Modifier.scale( 0.9f )
-                        .clickable {
-                                   val dataList = title.split( "," )
-                                   favoriteViewModel
-                                       .insertFavorite( Favorite(
-                                           city = dataList[ 0 ], // city name
-                                           country = dataList[ 1 ] // country
-                                                                   ) )
+                val isAlreadyFavList = favoriteViewModel
+                    .favList.collectAsState().value.filter { item ->
+                        (item.city == title.split(",")[0])
+                    }
 
-                        },
-                tint = Color.Red.copy( alpha = 0.6f ))
+                if (isAlreadyFavList.isNullOrEmpty()) {
+
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Favorite icon",
+                        modifier = Modifier
+                            .scale(0.9f)
+                            .clickable {
+                                val dataList = title.split(",")
+                                favoriteViewModel
+                                    .insertFavorite(
+                                        Favorite(
+                                            city = dataList[0], // city name
+                                            country = dataList[1] // country
+                                        )
+                                    ).run {
+                                        showIt.value = true
+                                    }
+
+                            },
+                        tint = Color.Red.copy(alpha = 0.6f)
+                    )
+
+                } else {
+
+                    showIt.value = false
+
+                    Box {}
+                }
+
+
+                ShowToast(context = context, showIt)
 
             }
 
         },
         backgroundColor = Color.Transparent,
         elevation = elevation )
+
+}
+
+@Composable
+fun ShowToast( context: Context, showIt: MutableState<Boolean> ) {
+
+    if ( showIt.value ) {
+
+        Toast.makeText( context, "Added to Favorites",
+                    Toast.LENGTH_SHORT ).show()
+
+    }
 
 }
