@@ -1,6 +1,4 @@
 # JetWeatherForecast
-
-# JetNote
 Aplicativo previsão do tempo do curso: <strong>Android Jetpack Compose: The Comprehensive Bootcamp</strong>.
 <div>
 <hr>
